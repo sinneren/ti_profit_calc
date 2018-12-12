@@ -7,6 +7,7 @@ class App extends Component {
     summary_buy: 0,
     summary: 0,
     price: 0,
+    price_new: 0,
     comission: 99,
     tax: 0.3,
     double_comission: true,
@@ -18,8 +19,9 @@ class App extends Component {
     let price_zero = price_count - price_after_buying + price_count;
 
     this.setState({
-      summary_buy: price_after_buying,
-      summary: price_zero,
+      summary_buy: price_after_buying.toFixed(2),
+      summary: price_zero.toFixed(2),
+      price_new: parseFloat(price_zero / this.state.count).toFixed(2),
     });
   }
   onChangeHandler = (event) => {
@@ -45,8 +47,8 @@ class App extends Component {
           <input onChange={this.onChangeHandler} name="tax" placeholder="tax" value={this.state.tax} />
           <input onChange={this.onChangeHandler} name="comission" placeholder="comission" value={this.state.comission} />
           <label><small>Двойная комиссия</small> <input type="checkbox" name="double_comission" checked={this.state.double_comission} onChange={this.onChangeHandler} /></label>
-          <button onClick={this.submitHandler}>Посчитать</button>
-          <div>{this.state.summary_buy + " [" + this.state.summary + "]"}</div>
+          <button onClick={this.submitHandler} className="btn">Посчитать</button>
+          <div>{this.state.summary_buy + " [" + this.state.summary + " (" + this.state.price_new + ")]"}</div>
         </header>
       </div>
     );
