@@ -2,19 +2,15 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(9px + 0.85vmin);
   color: white;
 }
 
@@ -42,7 +38,6 @@ label {
   display: block;
   padding: 15px 0;
   cursor: pointer;
-  font-size: 16px;
   text-align: left;
 }
 label input[type="text"] {
@@ -54,14 +49,14 @@ label input[type="text"] {
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
+  padding: 5px;
 }
 .results {
   display: block;
   width: 100%;
-  margin: 10px;
+  margin: 15px 0;
   padding: 10px;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
   color: #282c34;
   text-align: left;
   background-color: gainsboro;
@@ -73,5 +68,4 @@ label input[type="text"] {
 .results strong {
   margin-left: 10px;
   float: right;
-  font-size: 16px;
 }
