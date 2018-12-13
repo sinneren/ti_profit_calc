@@ -26,6 +26,7 @@ class App extends Component {
   }
   onChangeHandler = (event) => {
     let inputName = event.currentTarget.name;
+    event.currentTarget.value = event.currentTarget.value.replace(/[^0-9.]/g, "");
     let inputVal = event.currentTarget.value;
 
     this.setState({
