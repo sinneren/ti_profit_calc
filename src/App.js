@@ -1,7 +1,24 @@
-import React, { Component } from 'react';
+// @flow
+
+import * as React from 'react';
 import './App.css';
 
-class App extends Component {
+type State = {
+  count: number,
+  summary_buy: number,
+  summary: number,
+  price: number,
+  price_new: number,
+  comission: number,
+  tax: number,
+  double_comission: boolean,
+}
+class App extends React.Component<State, {
+  modifier: number,
+  price_count: number,
+  price_after_buying: number,
+  price_zero: number,
+}> {
   state = {
     count: 0,
     summary_buy: 0,
@@ -15,14 +32,14 @@ class App extends Component {
 
   calculate = () => {
     let modifier = this.state.double_comission ? 2 : 1;
-    let price_count = parseFloat(this.state.price * this.state.count);
-    let price_after_buying = price_count - parseFloat((price_count * this.state.tax / 100) * 2) - parseFloat(this.state.comission * modifier);
+    let price_count = this.state.price * this.state.count;
+    let price_after_buying = price_count - (price_count * this.state.tax / 100) * 2 - this.state.comission * modifier;
     let price_zero = price_count - price_after_buying + price_count;
 
     this.setState({
       summary_buy: price_after_buying.toFixed(2),
       summary: price_zero.toFixed(2),
-      price_new: parseFloat(price_zero / this.state.count).toFixed(2),
+      price_new: (price_zero / this.state.count).toFixed(2),
     });
   }
 
