@@ -29,10 +29,10 @@ class App extends React.Component<Props, State> {
   };
 
   calculate = () => {
-    let modifier = this.state.double_comission ? 2 : 1;
-    let price_count = this.state.price * this.state.count;
-    let price_after_buying = price_count - (price_count * this.state.tax / 100) * 2 - this.state.comission * modifier;
-    let price_zero = price_count - price_after_buying + price_count;
+    let modifier: number  = this.state.double_comission ? 2 : 1;
+    let price_count: number  = this.state.price * this.state.count;
+    let price_after_buying: number  = price_count - (price_count * this.state.tax / 100) * 2 - this.state.comission * modifier;
+    let price_zero: number = price_count - price_after_buying + price_count;
 
     this.setState({
       summary_buy: price_after_buying,
@@ -42,9 +42,9 @@ class App extends React.Component<Props, State> {
   }
 
   onChangeHandler = (event: any) => {
-      let inputName = event.currentTarget.name;
+      let inputName: string = event.currentTarget.name;
       event.currentTarget.value = event.currentTarget.value.replace(/[^0-9.]/g, "");
-      let inputVal = event.currentTarget.value;
+      let inputVal: number  = event.currentTarget.value;
 
       this.setState({
         [inputName]: (inputName === "double_comission") ? !this.state.double_comission : inputVal,
