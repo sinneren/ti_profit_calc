@@ -12,6 +12,7 @@ class App extends Component {
     tax: 0.3,
     double_comission: true,
   };
+
   calculate = () => {
     let modifier = this.state.double_comission ? 2 : 1;
     let price_count = parseFloat(this.state.price * this.state.count);
@@ -24,15 +25,17 @@ class App extends Component {
       price_new: parseFloat(price_zero / this.state.count).toFixed(2),
     });
   }
-  onChangeHandler = (event) => {
-    let inputName = event.currentTarget.name;
-    event.currentTarget.value = event.currentTarget.value.replace(/[^0-9.]/g, "");
-    let inputVal = event.currentTarget.value;
 
-    this.setState({
-      [inputName]: (inputName === "double_comission") ? !this.state.double_comission : inputVal,
-    });
+  onChangeHandler = (event) => {
+      let inputName = event.currentTarget.name;
+      event.currentTarget.value = event.currentTarget.value.replace(/[^0-9.]/g, "");
+      let inputVal = event.currentTarget.value;
+
+      this.setState({
+        [inputName]: (inputName === "double_comission") ? !this.state.double_comission : inputVal,
+      });
   }
+
   submitHandler = (event) => {
     event.preventDefault();
 
@@ -42,14 +45,34 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>Калькулятор точки безубыточности для Тинькофф.Инвестиций</h1>
-          <input onChange={this.onChangeHandler} name="price" placeholder="price" />
-          <input onChange={this.onChangeHandler} name="count" placeholder="count" />
-          <input onChange={this.onChangeHandler} name="tax" placeholder="tax" value={this.state.tax} />
-          <input onChange={this.onChangeHandler} name="comission" placeholder="comission" value={this.state.comission} />
-          <label><small>Двойная комиссия</small> <input type="checkbox" name="double_comission" checked={this.state.double_comission} onChange={this.onChangeHandler} /></label>
-          <button onClick={this.submitHandler} className="btn">Посчитать</button>
-          <div>{this.state.summary_buy + " [" + this.state.summary + " (" + this.state.price_new + ")]"}</div>
+          <div className="container">
+            <h3>Помощник для Тинькофф.Инвестиций</h3>
+            <label>
+              Цена покупки акции:
+              <input type="text" onChange={this.onChangeHandler} name="price" placeholder="price" />
+            </label>
+            <label>
+              Количество (в лоте):
+              <input type="text" onChange={this.onChangeHandler} name="count" placeholder="count" />
+            </label>
+            <label>
+              Комиссия за сделку:
+              <input type="text" onChange={this.onChangeHandler} name="tax" placeholder="tax" value={this.state.tax} />
+            </label>
+            <label>
+              Комиссия сервиса:
+              <input type="text" onChange={this.onChangeHandler} name="comission" placeholder="comission" value={this.state.comission} />
+            </label>
+            <label>
+              <small>Двойная комиссия</small> <input type="checkbox" name="double_comission" checked={this.state.double_comission} onChange={this.onChangeHandler} />
+            </label>
+            <button onClick={this.submitHandler} className="btn">Посчитать</button>
+            <code className="results">
+              <div>Реальная цена лота: <strong>{this.state.summary_buy}</strong></div>
+              <div>Цена лота для выхода в ноль: <strong>{this.state.summary}</strong></div>
+              <div>Цена акции для выхода в ноль: <strong>{this.state.price_new}</strong></div>
+            </code>
+          </div>
         </header>
       </div>
     );

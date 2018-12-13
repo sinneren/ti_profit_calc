@@ -22,22 +22,56 @@
   color: #61dafb;
 }
 
-
-
 .btn {
+  padding: 1em 2em;
   appearance: none;
   border: 1px solid #61dafb;
   color: #61dafb;
   border-radius: 6px;
   background-color: #282c34;
-  padding: 1em 2em;
+  outline: none;
   cursor: pointer;
 }
 input {
-  border-radius: 6px;
   margin: 5px 0;
-  padding: 0.3em 0.5em;
+  padding: 0.4em 0.5em;
+  border: 1px solid #61dafb;
+  border-radius: 6px;
 }
 label {
+  display: block;
+  padding: 15px 0;
   cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+}
+label input[type="text"] {
+  float: right;
+  outline: none;
+}
+.container {
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.results {
+  display: block;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  color: #282c34;
+  text-align: left;
+  background-color: gainsboro;
+  white-space: nowrap;
+}
+.results div {
+  margin: 5px 0;
+}
+.results strong {
+  margin-left: 10px;
+  float: right;
+  font-size: 16px;
 }
