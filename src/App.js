@@ -3,6 +3,9 @@
 import * as React from 'react';
 import './App.css';
 
+type Props = {
+
+}
 type State = {
   count: number,
   summary_buy: number,
@@ -13,12 +16,7 @@ type State = {
   tax: number,
   double_comission: boolean,
 }
-class App extends React.Component<State, {
-  modifier: number,
-  price_count: number,
-  price_after_buying: number,
-  price_zero: number,
-}> {
+class App extends React.Component<Props, State> {
   state = {
     count: 0,
     summary_buy: 0,
@@ -37,13 +35,13 @@ class App extends React.Component<State, {
     let price_zero = price_count - price_after_buying + price_count;
 
     this.setState({
-      summary_buy: price_after_buying.toFixed(2),
-      summary: price_zero.toFixed(2),
-      price_new: (price_zero / this.state.count).toFixed(2),
+      summary_buy: price_after_buying,
+      summary: price_zero,
+      price_new: (price_zero / this.state.count),
     });
   }
 
-  onChangeHandler = (event) => {
+  onChangeHandler = (event: any) => {
       let inputName = event.currentTarget.name;
       event.currentTarget.value = event.currentTarget.value.replace(/[^0-9.]/g, "");
       let inputVal = event.currentTarget.value;
@@ -53,11 +51,12 @@ class App extends React.Component<State, {
       });
   }
 
-  submitHandler = (event) => {
+  submitHandler = (event: any) => {
     event.preventDefault();
 
     this.calculate()
   }
+
   render() {
     return (
       <div className="App">
@@ -85,9 +84,9 @@ class App extends React.Component<State, {
             </label>
             <button onClick={this.submitHandler} className="btn">Посчитать</button>
             <code className="results">
-              <div>Реальная цена лота: <strong>{this.state.summary_buy}</strong></div>
-              <div>Цена лота для выхода в ноль: <strong>{this.state.summary}</strong></div>
-              <div>Цена акции для выхода в ноль: <strong>{this.state.price_new}</strong></div>
+              <div>Реальная цена лота: <strong>{this.state.summary_buy.toFixed(2)}</strong></div>
+              <div>Цена лота для выхода в ноль: <strong>{this.state.summary.toFixed(2)}</strong></div>
+              <div>Цена акции для выхода в ноль: <strong>{this.state.price_new.toFixed(2)}</strong></div>
             </code>
           </div>
         </header>
