@@ -23,16 +23,23 @@
   appearance: none;
   border: 1px solid #61dafb;
   color: #61dafb;
-  border-radius: 6px;
+  border-radius: 3px;
   background-color: #282c34;
   outline: none;
   cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+.btn:hover {
+  border: 1px solid #61dafb;
+  color: #282c34;
+  background-color: #61dafb;
 }
 input {
   margin: 5px 0;
   padding: 0.4em 0.5em;
   border: 1px solid #61dafb;
-  border-radius: 6px;
+  border-radius: 3px;
 }
 label {
   display: block;
@@ -40,6 +47,7 @@ label {
   cursor: pointer;
   text-align: left;
 }
+label input[type="number"],
 label input[type="text"] {
   float: right;
   outline: none;
@@ -68,4 +76,7 @@ label input[type="text"] {
 .results strong {
   margin-left: 10px;
   float: right;
+}
+.main-title {
+  font-size: 1.478em;
 }

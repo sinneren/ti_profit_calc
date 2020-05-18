@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import './App.css';
+import formatMoney from './utils/formatmoney';
 
 type Props = {
 
@@ -29,16 +30,18 @@ class App extends React.Component<Props, State> {
   };
 
   calculate = () => {
-    let modifier: number  = this.state.double_comission ? 2 : 1;
-    let price_count: number  = this.state.price * this.state.count;
-    let price_after_buying: number  = price_count - (price_count * this.state.tax / 100) * 2 - this.state.comission * modifier;
-    let price_zero: number = price_count - price_after_buying + price_count;
-
-    this.setState({
-      summary_buy: price_after_buying,
-      summary: price_zero,
-      price_new: (price_zero / this.state.count),
-    });
+    if (this.state.count > 0) {
+      let modifier: number  = this.state.double_comission ? 2 : 1;
+      let price_count: number  = this.state.price * this.state.count;
+      let price_after_buying: number  = price_count - (price_count * this.state.tax / 100) * 2 - this.state.comission * modifier;
+      let price_zero: number = price_count - price_after_buying + price_count;
+  
+      this.setState({
+        summary_buy: price_after_buying,
+        summary: price_zero,
+        price_new: (price_zero / this.state.count),
+      });
+    }
   }
 
   onChangeHandler = (event: any) => {
@@ -54,7 +57,7 @@ class App extends React.Component<Props, State> {
   submitHandler = (event: any) => {
     event.preventDefault();
 
-    this.calculate()
+    this.calculate();
   }
 
   render() {
@@ -62,14 +65,14 @@ class App extends React.Component<Props, State> {
       <div className="App">
         <header className="App-header">
           <div className="container">
-            <h3>Помощник для Тинькофф.Инвестиций</h3>
+            <h3 className="main-title">Помощник для Тинькофф.Инвестиций</h3>
             <label>
               Цена покупки акции:
               <input type="text" onChange={this.onChangeHandler} name="price" placeholder="price" />
             </label>
             <label>
               Количество (в лоте):
-              <input type="text" onChange={this.onChangeHandler} name="count" placeholder="count" />
+              <input type="number" onChange={this.onChangeHandler} name="count" placeholder="count" />
             </label>
             <label>
               Комиссия за сделку:
@@ -84,9 +87,9 @@ class App extends React.Component<Props, State> {
             </label>
             <button onClick={this.submitHandler} className="btn">Посчитать</button>
             <code className="results">
-              <div>Реальная цена лота: <strong>{this.state.summary_buy.toFixed(2)}</strong></div>
-              <div>Цена лота для выхода в ноль: <strong>{this.state.summary.toFixed(2)}</strong></div>
-              <div>Цена акции для выхода в ноль: <strong>{this.state.price_new.toFixed(2)}</strong></div>
+              <div><small>Реальная цена лота</small>: <strong>{formatMoney(this.state.summary_buy)}</strong></div>
+              <div><small>Цена лота для выхода в ноль</small>: <strong>{formatMoney(this.state.summary)}</strong></div>
+              <div><small>Цена акции для выхода в ноль</small>: <strong>{formatMoney(this.state.price_new)}</strong></div>
             </code>
           </div>
         </header>
